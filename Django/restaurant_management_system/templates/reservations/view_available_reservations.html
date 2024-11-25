@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Available Reservations</h2>
+    {% if request.session.is_admin %}
+        
+    {% endif %}
+    <div class="row">
+        {% for reservation in available_reservations %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5>{{ reservation.name }}</h5>
+                        <p>{{ reservation.description }}</p>
+                        <p><strong>Price:</strong> ${{ reservation.price }}</p>
+                        {% if not request.session.is_admin %}
+                            <a href="{% url 'make_reservation' reservation.id %}" class="btn btn-success">Book Now</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

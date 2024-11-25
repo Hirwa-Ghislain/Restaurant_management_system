@@ -1,0 +1,26 @@
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Make a Reservation</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            {{ form.date }}
+        </div>
+        <div class="mb-3">
+            <label for="time" class="form-label">Time</label>
+            {{ form.time }}
+        </div>
+        <div class="mb-3">
+            <label for="number_of_guests" class="form-label">Number of Guests</label>
+            {{ form.number_of_guests }}
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Special Requests</label>
+            {{ form.description }}
+        </div>
+        <button type="submit" class="btn btn-primary">Confirm Reservation</button>
+    </form>
+</div>
+{% endblock %}

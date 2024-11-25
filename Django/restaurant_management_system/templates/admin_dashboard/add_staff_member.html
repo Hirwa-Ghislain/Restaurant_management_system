@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Staff Member</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base styles and fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #2d3436;
+        }
+    
+        /* Navbar Styling */
+        .navbar {
+            background: linear-gradient(135deg, #e17055 0%, #fab1a0 100%) !important;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+    
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: white !important;
+            letter-spacing: -0.5px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+    
+        /* Improved Sidebar */
+        .sidebar {
+            background: white;
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.06);
+            position: fixed;
+            width: 280px;
+            z-index: 1000;
+        }
+    
+        .sidebar h4 {
+            color: #2d3436;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+        }
+    
+        .sidebar a {
+            background: #f8f9fa;
+            color: #2d3436;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            position: relative;
+            border: 1px solid #eee;
+        }
+    
+        .sidebar a i {
+            color: #e17055;
+            margin-right: 12px;
+            font-size: 1.1rem;
+            width: 24px;
+            transition: all 0.3s ease;
+        }
+    
+        .sidebar a:hover {
+            background: linear-gradient(135deg, #e17055 0%, #fab1a0 100%);
+            color: white;
+            transform: translateX(5px);
+            border-color: transparent;
+        }
+    
+        .sidebar a:hover i {
+            color: white;
+        }
+    
+        /* Main Content Area */
+        .col-md-9 {
+            margin-left: 280px;
+            padding: 2rem;
+        }
+    
+        /* Staff Members Table Section */
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+    
+        .container h2 {
+            color: #2d3436;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+    
+        /* Add Staff Button */
+        .btn-success {
+            background: linear-gradient(135deg, #e17055 0%, #fab1a0 100%);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(225, 112, 85, 0.2);
+        }
+    
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(225, 112, 85, 0.3);
+        }
+    
+        /* Table Styling */
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+    
+        .table {
+            margin-bottom: 0;
+        }
+    
+        .table thead th {
+            background: #f8f9fa;
+            color: #2d3436;
+            font-weight: 600;
+            padding: 1rem;
+            border: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    
+        .table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+            border-top: 1px solid #f1f1f1;
+            color: #636e72;
+        }
+    
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+    
+        .table tbody tr:hover {
+            background: #fff5f0;
+        }
+    
+        /* Action Buttons */
+        .btn-warning, .btn-danger {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+    
+        .btn-warning {
+            background: #ffeaa7;
+            border: none;
+            color: #2d3436;
+        }
+    
+        .btn-danger {
+            background: #fff5f5;
+            border: none;
+            color: #e74c3c;
+        }
+    
+        .btn-warning:hover {
+            background: #fdcb6e;
+            transform: translateY(-2px);
+        }
+    
+        .btn-danger:hover {
+            background: #ffe5e5;
+            transform: translateY(-2px);
+        }
+    
+        /* Alert Styling */
+        .alert-info {
+            background: #f0f7ff;
+            border: none;
+            color: #3498db;
+            border-radius: 10px;
+            padding: 1rem;
+            font-weight: 500;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 991.98px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                min-height: auto;
+                margin-bottom: 1rem;
+            }
+    
+            .col-md-9 {
+                margin-left: 0;
+                padding: 1rem;
+            }
+    
+            .container {
+                padding: 1rem;
+            }
+    
+            .table-responsive {
+                border-radius: 15px;
+                overflow-x: auto;
+            }
+        }
+    
+        /* Staff Role Badge */
+        .role-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+    
+        .role-admin {
+            background: #fff5f0;
+            color: #e17055;
+        }
+    
+        .role-staff {
+            background: #f0fff4;
+            color: #28a745;
+        }
+    
+        /* Date Joined Style */
+        .date-joined {
+            font-size: 0.9rem;
+            color: #a0aec0;
+        }
+    
+        /* Table Row Animation */
+        .table tbody tr {
+            animation: fadeIn 0.5s ease-out;
+        }
+    
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #28a745;"> <!-- Green color for the navbar -->
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Restaurant Admin</a> <!-- White text for the brand -->
+        </div>
+    </nav>
+    
+
+    <!-- Main Container -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Left Sidebar for Buttons -->
+            <div class="col-md-3 sidebar">
+                <h4 class="text-center mb-4">Admin Menu</h4>
+                <div class="mb-4">
+                    <a href="{% url 'admin_dashboard' %}" class="btn w-100 mb-3">
+                        <i class="fas fa-home me-2"></i> Home
+                    </a>
+                    
+                    <a href="{% url 'view_food_items' %}" class="btn w-100 mb-3">
+                        <i class="fas fa-utensils me-2"></i>Food Items
+                    </a>
+
+                    <a href="{% url 'admin_view_orders' %}" class="btn w-100 mb-3">
+                        <i class="fas fa-receipt me-2"></i> Orders
+                    </a>
+                    <a href="{% url 'view_reservations' %}" class="btn w-100 mb-3">
+                        <i class="fas fa-calendar-alt me-2"></i> Reservations
+                    </a>
+                    <a href="{% url 'view_staff' %}" class="btn w-100">
+                        <i class="fas fa-users me-2"></i>Staff Members
+                    </a>
+                    <a href="{% url 'admin_logout' %}" class="btn w-100">
+                        <i class="fas fa-sign-out-alt me-2"></i> Logout
+                    </a>
+                    
+                </div>
+            </div>
+            
+            <!-- Main Content Section -->
+            <div class="col-md-9">
+                <div class="container mt-5">
+                    <h2 class="text-center mb-4">Add New Staff Member</h2>
+                    <div class="card p-4 shadow form-container">
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="first_name" class="form-label">First Name</label>
+                                <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Enter first name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="last_name" class="form-label">Last Name</label>
+                                <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Enter last name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Enter email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="text" name="phone" id="phone" class="form-control" placeholder="Enter phone number" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Role</label>
+                                <select name="role" id="role" class="form-control">
+                                    <option value="waiter">Waiter</option>
+                                    <option value="chef">Chef</option>
+                                    <option value="manager">Manager</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success w-30">Add Staff Member</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Signup - Ubumuntu Resto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        /* Base styles and fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f6f9fc 0%, #eef2f7 100%);
+            min-height: 100vh;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #2d3436 !important;
+        }
+
+        .btn-outline-light {
+            color: #2d3436 !important;
+            border-color: #e17055 !important;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light:hover {
+            background: #e17055 !important;
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        /* Form Container */
+        .container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Form Header */
+        h3 {
+            color: #2d3436;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* Form Fields */
+        .form-label {
+            font-weight: 500;
+            color: #2d3436;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border: 2px solid #eef2f7;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+        }
+
+        .form-control:focus {
+            border-color: #e17055;
+            box-shadow: 0 0 0 4px rgba(225, 112, 85, 0.1);
+            background: white;
+        }
+
+        .form-control::placeholder {
+            color: #a0aec0;
+        }
+
+        /* Password Toggle Button */
+        .input-group .btn-outline-secondary {
+            border: 2px solid #eef2f7;
+            border-left: none;
+            background: #f8fafc;
+            border-radius: 0 12px 12px 0;
+            color: #2d3436;
+        }
+
+        .input-group .btn-outline-secondary:hover {
+            background: #eef2f7;
+        }
+
+        .input-group .form-control {
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+        }
+
+        /* Error Messages */
+        .text-danger {
+            color: #e74c3c !important;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .text-danger p {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Submit Button */
+        .btn-success {
+            background: linear-gradient(135deg, #e17055 0%, #fab1a0 100%);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(225, 112, 85, 0.2);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(225, 112, 85, 0.3);
+            background: linear-gradient(135deg, #d65d45 0%, #e99b89 100%);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 1rem;
+            }
+
+            .card {
+                padding: 1.5rem !important;
+            }
+
+            .btn-success {
+                padding: 0.7rem 1.5rem;
+            }
+        }
+
+        /* Input Group Animations */
+        .input-group {
+            transition: all 0.3s ease;
+        }
+
+        .input-group:focus-within {
+            transform: translateY(-2px);
+        }
+
+        /* Custom Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Field Icons */
+        .input-group-text {
+            background: transparent;
+            border: none;
+            padding-right: 0;
+        }
+
+        .bi {
+            font-size: 1.1rem;
+            color: #a0aec0;
+        }
+
+        /* Success States */
+        .form-control:valid:not(:placeholder-shown) {
+            border-color: #2ecc71;
+        }
+
+        /* Error States */
+        .form-control:invalid:not(:placeholder-shown) {
+            border-color: #e74c3c;
+        }
+
+        /* Form Group Spacing */
+        .mb-3 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        /* Additional Helper Text */
+        .form-text {
+            color: #718096;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Ubumuntu Resto</a>
+            <div class="d-flex">
+                {% if user.is_authenticated %}
+                <a class="btn btn-outline-light me-2" href="/logout">Logout</a>
+                {% else %}
+                <a class="btn btn-outline-light me-2" href="/login">Login</a>
+                <a class="btn btn-outline-light" href="/register">Signup</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Signup Form -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <form method="post" class="card p-4 shadow-sm bg-light">
+                    {% csrf_token %}
+                    <h3 class="text-center mb-4">Create a New Account</h3>
+
+                    <!-- Username -->
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username</label>
+                        <input type="text" name="username" id="id_username" class="form-control" placeholder="Enter your username">
+                        {% if form.username.errors %}
+                        <div class="text-danger">
+                            {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label">Email</label>
+                        <input type="email" name="email" id="id_email" class="form-control" placeholder="Enter your email">
+                        {% if form.email.errors %}
+                        <div class="text-danger">
+                            {% for error in form.email.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3 position-relative">
+                        <label for="id_password1" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Enter password">
+                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword1()" tabindex="-1">
+                                <i id="toggle-icon1" class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        {% if form.password1.errors %}
+                        <div class="text-danger">
+                            {% for error in form.password1.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="mb-3 position-relative">
+                        <label for="id_password2" class="form-label">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirm password">
+                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword2()" tabindex="-1">
+                                <i id="toggle-icon2" class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        {% if form.password2.errors %}
+                        <div class="text-danger">
+                            {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="mb-3">
+                        <label for="id_phone" class="form-label">Phone</label>
+                        <input type="text" name="phone" id="id_phone" class="form-control" placeholder="Enter your phone number">
+                        {% if form.phone.errors %}
+                        <div class="text-danger">
+                            {% for error in form.phone.errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-success w-100">Signup</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toggle password visibility for the first password field
+        function togglePassword1() {
+            const passwordField1 = document.getElementById('id_password1');
+            const icon1 = document.getElementById('toggle-icon1');
+            if (passwordField1.type === 'password') {
+                passwordField1.type = 'text';
+                icon1.classList.remove('bi-eye');
+                icon1.classList.add('bi-eye-slash');
+            } else {
+                passwordField1.type = 'password';
+                icon1.classList.remove('bi-eye-slash');
+                icon1.classList.add('bi-eye');
+            }
+        }
+
+        // Toggle password visibility for the second password field
+        function togglePassword2() {
+            const passwordField2 = document.getElementById('id_password2');
+            const icon2 = document.getElementById('toggle-icon2');
+            if (passwordField2.type === 'password') {
+                passwordField2.type = 'text';
+                icon2.classList.remove('bi-eye');
+                icon2.classList.add('bi-eye-slash');
+            } else {
+                passwordField2.type = 'password';
+                icon2.classList.remove('bi-eye-slash');
+                icon2.classList.add('bi-eye');
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+{% extends 'layout.html' %} 
+{% block content %}
+<h1>Delete Reservation</h1>
+
+<p>Are you sure you want to delete {{ reservation.id }}?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Delete</button>
+</form>
+{% endblock %}

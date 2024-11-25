@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ubumuntu Resto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #2d3436;
+        }
+
+        /* Navbar Styling */
+        .topnav {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px 5%;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            position: fixed;
+            width: 90%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-title {
+            color: #e17055;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .topnav .auth-buttons a {
+            background-color: transparent;
+            color: #2d3436;
+            padding: 10px 20px;
+            margin-left: 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .topnav .auth-buttons a:last-child {
+            background-color: #e17055;
+            color: white;
+        }
+
+        .topnav .auth-buttons a:hover {
+            transform: translateY(-2px);
+            border-color: #e17055;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 180px 20px 100px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .hero h1 {
+            color: #2d3436;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            color: #636e72;
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .hero .cta-buttons a {
+            background-color: #e17055;
+            color: white;
+            padding: 15px 35px;
+            margin: 10px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(225, 112, 85, 0.3);
+        }
+
+        .hero .cta-buttons a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(225, 112, 85, 0.4);
+        }
+
+        .hero .cta-buttons a:first-child {
+            background-color: #2d3436;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: #ffffff;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            padding: 40px 30px;
+            background: white;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature h3 {
+            color: #e17055;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .feature p {
+            color: #636e72;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #2d3436;
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="topnav">
+        <div class="menu">
+            <h1 class="navbar-title">Ubumuntu Resto</h1>
+        </div>
+        <div class="auth-buttons">
+            {% if user.is_authenticated %}
+            <a href="/logout">Logout</a>
+            {% else %}
+            <a href="/login">Login</a>
+            <a href="/register">Signup</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Bienvenue à Ubumuntu Resto</h1>
+        <p>Discover the best dining experience with our user-friendly restaurant management system.</p>
+        <div class="cta-buttons">
+            <a href="/register">Get Started</a>
+            <a href="/login">Log In</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <h3>Easy Online Orders</h3>
+            <p>Order your favorite dishes with just a few clicks.</p>
+        </div>
+        <div class="feature">
+            <h3>Table Reservations</h3>
+            <p>Book a table at your preferred time to avoid waiting.</p>
+        </div>
+        <div class="feature">
+            <h3>Personalized Profile</h3>
+            <p>Manage your profile, view orders, and track reservations.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Ubumuntu Resto. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'js.js' %}"></script>
+</body>
+
+</html>
