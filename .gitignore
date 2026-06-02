@@ -1,2 +1,7 @@
 ./Django/env
 ./fastApi/env
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
